@@ -1,0 +1,12 @@
+streamlit
+openai
+requests
+python-dotenv
+pinecone-client
+
+pypdf
+pdf2image
+Pillow
+pytesseract
+nltk
+tiktoken
