@@ -1,6 +1,7 @@
 import openai
 import streamlit as st
 from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
 import json
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
@@ -9,15 +10,15 @@ mongodb_password = st.secrets["ATLAS_PASSWORD"]
 mongodb_username = st.secrets["ATLAS_USERNAME"]
 mongodb_database = st.secrets["ATLAS_DATABASE_NAME"]
 
-connection_string = f"mongodb+srv://{mongodb_username}:{mongodb_password}@{mongodb_database}.svlfufy.mongodb.net/?retryWrites=true&w=majority"
-
-# Initialize connection.
-# Uses st.cache_resource to only run once.
-@st.cache_resource
-def init_connection():
-    return MongoClient(connection_string)
-
-client = init_connection()
+uri = f"mongodb+srv://{mongodb_username}:{mongodb_password}@{mongodb_database}.svlfufy.mongodb.net/?retryWrites=true&w=majority"
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
 
 gen_conf_db = client.general_conference
 rmn_speeches = gen_conf_db.russell_m_nelson
