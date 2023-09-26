@@ -7,7 +7,7 @@ from render import bot_msg_container_html_template, user_msg_container_html_temp
 import streamlit as st
 import openai, pinecone
 import prompts
-import json, print
+import json
 
 # Test MongoDB Connection
 from pymongo.mongo_client import MongoClient
