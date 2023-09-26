@@ -5,7 +5,7 @@ import json
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
-mongodb_password = st.secrets["ATLAS_BGROVER_PASSWORD"]
+mongodb_password = st.secrets["ATLAS_PASSWORD"]
 mongodb_username = st.secrets["ATLAS_USERNAME"]
 mongodb_database = st.secrets["ATLAS_DATABASE_NAME"]
 
