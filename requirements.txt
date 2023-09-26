@@ -1,12 +1,4 @@
-streamlit
-openai
-requests
-python-dotenv
-pinecone-client
-
-pypdf
-pdf2image
-Pillow
-pytesseract
-nltk
-tiktoken
+openai==0.28.0
+pinecone_client==2.2.4
+pymongo==4.5.0
+streamlit==1.27.0
