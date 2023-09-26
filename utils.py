@@ -319,7 +319,6 @@ def pinecone_semantic_search(query, index, **kwargs):
         year = [r["metadata"]["year"] for r in xr["matches"]]
         month = [r["metadata"]["month"] for r in xr["matches"]]
         author = [r["metadata"]["author"] for r in xr["matches"]]
-        print(title, month, year, author)
         transcripts = [r["metadata"]["text"] for r in xr["matches"]]
 
         sr_list = list(zip(title, author, month, year, transcripts))
