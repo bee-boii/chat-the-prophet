@@ -18,8 +18,17 @@ mongodb_username = st.secrets["ATLAS_USERNAME"]
 mongodb_database = st.secrets["ATLAS_DATABASE_NAME"]
 
 uri = f"mongodb+srv://{mongodb_username}:{mongodb_password}@{mongodb_database}.svlfufy.mongodb.net/?retryWrites=true&w=majority"
+
 # Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
+# Initialize connection.
+# Uses st.cache_resource to only run once.
+@st.cache_resource
+def init_connection():
+    return pymongo.MongoClient(**st.secrets["mongo"])
+
+client = init_connection()
+
+
 # Send a ping to confirm a successful connection
 try:
     client.admin.command('ping')
