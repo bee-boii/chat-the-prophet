@@ -11,7 +11,14 @@ mongodb_database = st.secrets["ATLAS_DATABASE_NAME"]
 
 connection_string = f"mongodb+srv://{mongodb_username}:{mongodb_password}@{mongodb_database}.svlfufy.mongodb.net/?retryWrites=true&w=majority"
 
-client = MongoClient(connection_string)
+# Initialize connection.
+# Uses st.cache_resource to only run once.
+@st.cache_resource
+def init_connection():
+    return MongoClient(connection_string)
+
+client = init_connection()
+
 gen_conf_db = client.general_conference
 rmn_speeches = gen_conf_db.russell_m_nelson
 
