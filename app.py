@@ -10,6 +10,7 @@ import prompts
 import json
 
 # Test MongoDB Connection
+import pymongo
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
