@@ -10,7 +10,6 @@ import prompts
 import json
 
 # Test MongoDB Connection
-import pymongo
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 
@@ -21,14 +20,7 @@ mongodb_database = st.secrets["ATLAS_DATABASE_NAME"]
 uri = f"mongodb+srv://{mongodb_username}:{mongodb_password}@{mongodb_database}.svlfufy.mongodb.net/?retryWrites=true&w=majority"
 
 # Create a new client and connect to the server
-# Initialize connection.
-# Uses st.cache_resource to only run once.
-@st.cache_resource
-def init_connection():
-    return pymongo.MongoClient(**st.secrets["mongo"])
-
-client = init_connection()
-
+client = MongoClient(uri, server_api=ServerApi('1'))
 
 # Send a ping to confirm a successful connection
 try:
