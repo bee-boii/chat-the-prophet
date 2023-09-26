@@ -52,9 +52,6 @@ def generate_response():
         atlas_json_query["keywords"], atlas_json_query["search_phrases"]
     )
 
-    with open("output/json/latest_atlas_search_results.json", "w") as f:
-        json.dump(atlas_search_results, f)
-
     # Perform semantic search and format results
     semantic_search_results = pinecone_semantic_search(user_query, index, top_k=9)
 
@@ -67,9 +64,6 @@ def generate_response():
 
     for speech in semantic_search_results:
         context += f"\"{speech['text']}\"\n({speech['title']} by {speech['author']}, {speech['month']} {speech['year']})\n\n"
-
-    with open("output/documents/latest_bot_context.txt", "w") as f:
-        f.write(context)
 
     # Convert chat history to a list of messages
     chat_messages = construct_messages(st.session_state.history)
