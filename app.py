@@ -7,8 +7,27 @@ from render import bot_msg_container_html_template, user_msg_container_html_temp
 import streamlit as st
 import openai, pinecone
 import prompts
-import json, pprint
+import json, print
 
+# Test MongoDB Connection
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+
+mongodb_password = st.secrets["ATLAS_PASSWORD"]
+mongodb_username = st.secrets["ATLAS_USERNAME"]
+mongodb_database = st.secrets["ATLAS_DATABASE_NAME"]
+
+uri = f"mongodb+srv://{mongodb_username}:{mongodb_password}@{mongodb_database}.svlfufy.mongodb.net/?retryWrites=true&w=majority"
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+# Send a ping to confirm a successful connection
+try:
+    client.admin.command('ping')
+    print("Pinged your deployment. You successfully connected to MongoDB!")
+except Exception as e:
+    print(e)
+
+# Initialize openai and pinecone
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 pinecone.init(
     api_key=st.secrets["PINECONE_API_KEY"],
